@@ -25,7 +25,7 @@ public class field : MonoBehaviour
             {4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0},
             {4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0},
             {4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0},
-            {4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0},
+            {4,4,4,4,4,5,5,4,4,0,0,0,0,0,0,0,0,0,0},
             {4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0},
             {4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0},
             {4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0},
@@ -90,11 +90,12 @@ public class field : MonoBehaviour
     void Start()
     {
         GameObject ObjTile = (GameObject)Resources.Load("Prefabs/Tile");
-        GameObject ObjBlock = (GameObject)Resources.Load("Prefabs/Tile");
+        GameObject ObjBlock = (GameObject)Resources.Load("Prefabs/Obstacle");
         GameObject ObjLight = (GameObject)Resources.Load("Prefabs/Tile");
         GameObject ObjTresureA = (GameObject)Resources.Load("Prefabs/Tile");
         GameObject ObjTresureB = (GameObject)Resources.Load("Prefabs/Tile");
         GameObject ObjTresureC = (GameObject)Resources.Load("Prefabs/Tile");
+        GameObject ObjWall = (GameObject)Resources.Load("Prefabs/WallAround");
 
         // ステージナンバー
         int StageNo = 0;
@@ -108,6 +109,7 @@ public class field : MonoBehaviour
             for(int j=0; j<TileMax; ++j)
             {
                 int data = StageData[StageNo, i, j];
+                float heightAdjust = 0.0f;
                 Debug.Log(data);
                 if(data > 0)
                 {
@@ -131,6 +133,7 @@ public class field : MonoBehaviour
                             break;
                         case 5:
                             obj = ObjBlock;
+                            heightAdjust = 1.0f;
                             break;
                         case 6:
                             obj = ObjLight;
@@ -145,8 +148,33 @@ public class field : MonoBehaviour
                             obj = ObjTresureC;
                             break;
                     }
-                    Instantiate(obj, new Vector3(j * TileLength - TotalTileLength / 2.0f, 0.0f,
+                    Instantiate(obj, new Vector3(j * TileLength - TotalTileLength / 2.0f, heightAdjust,
                         i * (-1.0f) * TileLength + TotalTileLength / 2.0f), Quaternion.identity);
+                }
+            }
+        }
+
+        // 壁並べる
+        for(int i = 0; i<TileMax+2; ++i)
+        {
+            GameObject obj = ObjWall;
+
+            for (int j = 0; j<TileMax+2; ++j)
+            {
+                bool view = false;
+                if( i == 0 || i == StageTileMax[StageNo] + 1)
+                {
+                    if(j <= StageTileMax[StageNo] + 1)
+                    view = true;
+                }
+                if( j == 0 || j == StageTileMax[StageNo] + 1)
+                {
+                    view = true;
+                }
+                if(view)
+                {
+                    Instantiate(obj, new Vector3(j * TileLength - TotalTileLength / 2.0f - 1.0f, 1.0f,
+                        i * (-1.0f) * TileLength + TotalTileLength / 2.0f + 1.0f), Quaternion.identity);
                 }
             }
         }
