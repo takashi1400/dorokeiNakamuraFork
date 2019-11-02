@@ -24,13 +24,13 @@ public class field : MonoBehaviour
         {
             {1,4,4,4,4,6,4,4,4,0,0,0,0,0,0,0,0,0,0},
             {4,4,4,4,4,6,4,6,6,0,0,0,0,0,0,0,0,0,0},
-            {4,4,4,4,4,6,4,6,4,0,0,0,0,0,0,0,0,0,0},
+            {4,4,4,4,4,6,4,6,7,0,0,0,0,0,0,0,0,0,0},
             {4,4,4,4,4,5,5,6,6,0,0,0,0,0,0,0,0,0,0},
             {4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0},
             {6,6,6,5,4,6,6,6,4,0,0,0,0,0,0,0,0,0,0},
-            {4,4,4,5,4,6,4,6,4,0,0,0,0,0,0,0,0,0,0},
+            {4,4,4,5,4,6,8,6,4,0,0,0,0,0,0,0,0,0,0},
             {4,6,6,6,4,6,6,6,2,0,0,0,0,0,0,0,0,0,0},
-            {4,6,4,6,4,4,4,3,4,0,0,0,0,0,0,0,0,0,0},
+            {4,6,9,6,4,4,4,3,4,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -92,9 +92,9 @@ public class field : MonoBehaviour
         GameObject ObjTile = (GameObject)Resources.Load("Prefabs/Tile");
         GameObject ObjBlock = (GameObject)Resources.Load("Prefabs/Obstacle");
         GameObject ObjLight = (GameObject)Resources.Load("Prefabs/Blight");
-        GameObject ObjTresureA = (GameObject)Resources.Load("Prefabs/Tile");
-        GameObject ObjTresureB = (GameObject)Resources.Load("Prefabs/Tile");
-        GameObject ObjTresureC = (GameObject)Resources.Load("Prefabs/Tile");
+        GameObject ObjTresureA = (GameObject)Resources.Load("Prefabs/TREASURE_1");
+        GameObject ObjTresureB = (GameObject)Resources.Load("Prefabs/TREASURE_2");
+        GameObject ObjTresureC = (GameObject)Resources.Load("Prefabs/TREASURE_3");
         GameObject ObjWall = (GameObject)Resources.Load("Prefabs/WallAround");
 
         // ステージナンバー
