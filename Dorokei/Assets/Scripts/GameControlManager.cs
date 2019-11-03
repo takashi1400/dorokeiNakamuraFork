@@ -35,6 +35,9 @@ public class GameControlManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Instantiate(ObjField, new Vector3(0,0,0), Quaternion.identity);
+
+
         GameTimer = 0.0f;
         InputGameTimer = 0.0f;
         GameInputCounter = 0;
@@ -78,7 +81,7 @@ public class GameControlManager : MonoBehaviour
                 }
             }
         }
-
+        Debug.Log(posTheif);
 
         Instantiate(ObjTheif, posTheif, Quaternion.identity);
         Instantiate(ObjPolice1, posPolice1, Quaternion.identity);
