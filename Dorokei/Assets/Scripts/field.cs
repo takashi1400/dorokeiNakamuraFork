@@ -6,15 +6,15 @@ public class field : MonoBehaviour
 {
     [Header("床の数")]
     [SerializeField]
-    int TileMax = 19;
+    public int TileMax = 19;
 
     [Header("床の長さ")]
     [SerializeField]
-    float TileLength = 1.0f;
+    public float TileLength = 1.0f;
 
     [Header("床の最大数")]
     [SerializeField]
-    int[] StageTileMax = {9, 13, 19};
+    public int[] StageTileMax = {9, 13, 19};
 
 
     [Header("仮のステージデータ")]

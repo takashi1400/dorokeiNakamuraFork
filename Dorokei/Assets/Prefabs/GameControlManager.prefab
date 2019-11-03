@@ -53,3 +53,4 @@ MonoBehaviour:
     type: 3}
   ObjPolice2: {fileID: 4990574403166445647, guid: 3289e19e1baf85044a36881b04307ed0,
     type: 3}
+  FieldData: {fileID: 0}

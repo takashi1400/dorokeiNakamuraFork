@@ -22,12 +22,26 @@ public class GameControlManager : MonoBehaviour
     public GameObject ObjPolice1;
     public GameObject ObjPolice2;
 
+    // フィールドデータ用
+    public field FieldData;
+    int StageNo;
+
     // Start is called before the first frame update
     void Start()
     {
         GameTimer = 0.0f;
         InputGameTimer = 0.0f;
         GameInputCounter = 0;
+        StageNo = 0;
+
+        // 床並べる
+        for (int i = 0; i < FieldData.TileMax; ++i)
+        {
+            for (int j = 0; j < FieldData.TileMax; ++j)
+            {
+                int data = FieldData.StageData[StageNo, i, j];
+            }
+        }
 
         Instantiate(ObjTheif, new Vector3(3, 0, 0), Quaternion.identity);
         Instantiate(ObjPolice1, new Vector3(2, 0, 0), Quaternion.identity);
