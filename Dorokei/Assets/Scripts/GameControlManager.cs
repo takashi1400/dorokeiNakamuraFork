@@ -399,6 +399,7 @@ public class GameControlManager : MonoBehaviour
 
         }
 
+        return moved;
     }
 
     // 警察1移動
