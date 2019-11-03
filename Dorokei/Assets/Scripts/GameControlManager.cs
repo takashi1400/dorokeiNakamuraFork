@@ -112,6 +112,8 @@ public class GameControlManager : MonoBehaviour
     [Header("宝物最大数")]
     [SerializeField]
     int TresureNumMax = 6;
+    int[] TresureNeedsData;
+    int TresureNeed;
     int TresureTotalNum;
 
     // 宝物
@@ -129,6 +131,8 @@ public class GameControlManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StageNo = 0;
+
         //Instantiate(ObjField, new Vector3(0,0,0), Quaternion.identity);
         Theif = new PlayerBase();
         Police1 = new PlayerBase();
@@ -138,6 +142,9 @@ public class GameControlManager : MonoBehaviour
         TresureTotalNum = 0;
         Tresures = new Tresure[TresureNumMax];
         TresureObjects = new GameObject[TresureNumMax];
+        TresureNeedsData = new int[3] { 1, 3, 3 };
+        TresureNeed = TresureNeedsData[StageNo];
+
         for(int i=0; i<TresureNumMax; ++i)
         {
             Tresures[i] = new Tresure();
@@ -150,7 +157,6 @@ public class GameControlManager : MonoBehaviour
         GameTimer = 0.0f;
         InputGameTimer = 0.0f;
         GameInputCounter = 0;
-        StageNo = 0;
 
         TileMax = ObjField.GetComponent<field>().TileMax;
         TileLength = ObjField.GetComponent<field>().TileLength;
@@ -165,7 +171,7 @@ public class GameControlManager : MonoBehaviour
         Vector3 posPolice1 = new Vector3(2, 0, 0);
         Vector3 posPolice2 = new Vector3(1, 0, 0);
 
-        // プレイヤー並べる
+        // プレイヤーと宝物並べる
         for (int i = 0; i < TileMax; ++i)
         {
             for (int j = 0; j < TileMax; ++j)
@@ -220,8 +226,9 @@ public class GameControlManager : MonoBehaviour
                     }
 
                     TresureObjects[TresureTotalNum] =
-                        Instantiate(obj, new Vector3(j * TileLength - TotalTileLength / 2.0f - 1.0f, 1.0f,
-                            i * (-1.0f) * TileLength + TotalTileLength / 2.0f + 1.0f), Quaternion.identity);
+                        Instantiate(obj, new Vector3(j * TileLength - TotalTileLength / 2.0f,
+                            1.0f,
+                            i * (-1.0f) * TileLength + TotalTileLength / 2.0f), Quaternion.identity);
 
                     ++TresureTotalNum;
                 }
