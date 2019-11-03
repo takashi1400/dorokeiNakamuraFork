@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameControlManager : MonoBehaviour
@@ -293,6 +292,8 @@ public class GameControlManager : MonoBehaviour
             InputGameTimer -= InputSpan;
             GameInputCounter++;
 
+<<<<<<< HEAD
+=======
             if(Theif.GetX() == Theif.GetOldX()
                 && Theif.GetZ() == Theif.GetOldZ()
                 )
@@ -306,6 +307,7 @@ public class GameControlManager : MonoBehaviour
             Theif.SetOldX(Theif.GetX());
             Theif.SetOldZ(Theif.GetZ());
             //isMoveTurn = false;
+>>>>>>> 6f001cfeb9ae1fda4134f57479670910dc1011f0
         }
 
         if (1.5f < InputGameTimer && InputGameTimer < 2f)
@@ -723,12 +725,6 @@ public class GameControlManager : MonoBehaviour
 
                 TresureObjects[i].transform.position = new Vector3(-100, 0, -100);
                 ++TresureGotNum;
-
-                // 泥棒勝った？
-                if (++TresureGotNum >= TresureNeed)
-                {
-                    SceneManager.LoadScene("Start");
-                }
                 break;
             }
         }
