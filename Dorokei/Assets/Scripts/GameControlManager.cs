@@ -15,7 +15,7 @@ public class GameControlManager : MonoBehaviour
 
     [Header("入力の時間")]
     [SerializeField]
-    float InputSpan = 2.0f;
+    public float InputSpan = 2.0f;
 
     // 泥棒、警察
     public GameObject ObjTheif;

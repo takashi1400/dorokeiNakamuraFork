@@ -14,9 +14,9 @@ public class BGMControl : MonoBehaviour
     void Start()
     {
         contollerobject = GameObject.FindGameObjectWithTag("GameGontrolManager");
+        gamecontrolmanager = contollerobject.GetComponent<GameControlManager>();
 
         criSource = this.GetComponent<CriAtomSource>();
-        gamecontrolmanager = contollerobject.GetComponent<GameControlManager>();
         //SoundPlay();
     }
 
@@ -34,6 +34,7 @@ public class BGMControl : MonoBehaviour
 
     private void SoundPlay()
     {
+        //サウンドパターン入れ替え
         criSource.cueName = (period % 2 == 0) ? "chase1" : "chase2";
         this.criSource.Play();
     }
