@@ -292,8 +292,6 @@ public class GameControlManager : MonoBehaviour
             InputGameTimer -= InputSpan;
             GameInputCounter++;
 
-<<<<<<< HEAD
-=======
             if(Theif.GetX() == Theif.GetOldX()
                 && Theif.GetZ() == Theif.GetOldZ()
                 )
@@ -307,7 +305,6 @@ public class GameControlManager : MonoBehaviour
             Theif.SetOldX(Theif.GetX());
             Theif.SetOldZ(Theif.GetZ());
             //isMoveTurn = false;
->>>>>>> 6f001cfeb9ae1fda4134f57479670910dc1011f0
         }
 
         if (1.5f < InputGameTimer && InputGameTimer < 2f)
