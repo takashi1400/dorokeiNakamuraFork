@@ -110,6 +110,8 @@ public class field : MonoBehaviour
             {
                 int data = StageData[StageNo, i, j];
                 float heightAdjust = 0.0f;
+                float xAdjust = 0.0f;
+                float zAdjust = 0.0f;
                 Debug.Log(data);
                 if(data > 0)
                 {
@@ -140,16 +142,27 @@ public class field : MonoBehaviour
                             break;
                         case 7:
                             obj = ObjTresureA;
+                            heightAdjust = 1.0f;
+                            xAdjust = -1.5f;
+                            zAdjust = -0.0f;
                             break;
                         case 8:
                             obj = ObjTresureB;
+                            heightAdjust = 1.0f;
+                            xAdjust = -1.5f;
+                            zAdjust = -0.0f;
                             break;
                         case 9:
                             obj = ObjTresureC;
+                            heightAdjust = 1.0f;
+                            xAdjust = -1.5f;
+                            zAdjust = -0.0f;
                             break;
                     }
-                    Instantiate(obj, new Vector3(j * TileLength - TotalTileLength / 2.0f, heightAdjust,
-                        i * (-1.0f) * TileLength + TotalTileLength / 2.0f), Quaternion.identity);
+                    Instantiate(obj, new Vector3(j * TileLength - TotalTileLength / 2.0f + xAdjust,
+                        heightAdjust,
+                        i * (-1.0f) * TileLength + TotalTileLength / 2.0f + zAdjust),
+                        Quaternion.identity);
                 }
             }
         }
@@ -165,11 +178,17 @@ public class field : MonoBehaviour
                 if( i == 0 || i == StageTileMax[StageNo] + 1)
                 {
                     if(j <= StageTileMax[StageNo] + 1)
-                    view = true;
+                    {
+                        view = true;
+                    }
                 }
                 if( j == 0 || j == StageTileMax[StageNo] + 1)
                 {
-                    view = true;
+                    if (i <= StageTileMax[StageNo] + 1)
+                    {
+                        view = true;
+
+                    }
                 }
                 if(view)
                 {
