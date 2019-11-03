@@ -28,5 +28,12 @@ public class SceneMove : MonoBehaviour
                 SceneManager.LoadScene("Credit");
             }
         }
+        else if (SceneManager.GetActiveScene().name == "Credit")
+        {
+            if (Input.GetKey(KeyCode.Return))
+            {
+                SceneManager.LoadScene("Start");
+            }
+        }
     }
 }
