@@ -733,7 +733,7 @@ public class GameControlManager : MonoBehaviour
                 // 泥棒勝った？
                 if (++TresureGotNum >= TresureNeed)
                 {
-                    SceneManager.LoadScene("Start");
+                    SceneManager.LoadScene("ThiefWin");
                 }
                 break;
             }
