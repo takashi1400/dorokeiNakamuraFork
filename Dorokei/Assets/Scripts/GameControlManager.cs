@@ -23,8 +23,13 @@ public class GameControlManager : MonoBehaviour
     public GameObject ObjPolice2;
 
     // フィールドデータ用
-    public field FieldData;
+    public GameObject ObjField;
     int StageNo;
+
+    int TileMax;
+    float TileLength;
+    int[] StageTileMax;
+    int[,,] StageData;
     float TotalTileLength;
 
     // Start is called before the first frame update
@@ -34,37 +39,46 @@ public class GameControlManager : MonoBehaviour
         InputGameTimer = 0.0f;
         GameInputCounter = 0;
         StageNo = 0;
-        TotalTileLength = FieldData.TileLength * FieldData.StageTileMax[StageNo];
+
+        TileMax = ObjField.GetComponent<field>().TileMax;
+        TileLength = ObjField.GetComponent<field>().TileLength;
+        StageTileMax = ObjField.GetComponent<field>().StageTileMax;
+        StageData = ObjField.GetComponent<field>().StageData;
+
+        TotalTileLength = TileLength * StageTileMax[StageNo];
 
 
         Vector3 posTheif = new Vector3(3, 0, 0);
         Vector3 posPolice1 = new Vector3(2, 0, 0);
         Vector3 posPolice2 = new Vector3(1, 0, 0);
 
-        // 床並べる
-        for (int i = 0; i < FieldData.TileMax; ++i)
+        // プレイヤー並べる
+        for (int i = 0; i < TileMax; ++i)
         {
-            for (int j = 0; j < FieldData.TileMax; ++j)
+            for (int j = 0; j < TileMax; ++j)
             {
-                int data = FieldData.StageData[StageNo, i, j];
-                if( data == 1)
+                int data = StageData[StageNo, i, j];
+                if (data == 1)
                 {
-                    posTheif = new Vector3(j * FieldData.TileLength - TotalTileLength / 2.0f,
-                            0.0f,
-                            i * (-1.0f) * FieldData.TileLength + TotalTileLength / 2.0f);
-                }else if( data == 2)
+                    posTheif = new Vector3(j * TileLength - TotalTileLength / 2.0f,
+                             0.0f,
+                             i * (-1.0f) * TileLength + TotalTileLength / 2.0f);
+                }
+                else if (data == 2)
                 {
-                    posPolice1 = new Vector3(j * FieldData.TileLength - TotalTileLength / 2.0f,
+                    posPolice1 = new Vector3(j * TileLength - TotalTileLength / 2.0f,
                             0.0f,
-                            i * (-1.0f) * FieldData.TileLength + TotalTileLength / 2.0f);
-                }else if( data == 3)
+                            i * (-1.0f) * TileLength + TotalTileLength / 2.0f);
+                }
+                else if (data == 3)
                 {
-                    posPolice2 = new Vector3(j * FieldData.TileLength - TotalTileLength / 2.0f,
+                    posPolice2 = new Vector3(j * TileLength - TotalTileLength / 2.0f,
                             0.0f,
-                            i * (-1.0f) * FieldData.TileLength + TotalTileLength / 2.0f);
+                            i * (-1.0f) * TileLength + TotalTileLength / 2.0f);
                 }
             }
         }
+
 
         Instantiate(ObjTheif, posTheif, Quaternion.identity);
         Instantiate(ObjPolice1, posPolice1, Quaternion.identity);

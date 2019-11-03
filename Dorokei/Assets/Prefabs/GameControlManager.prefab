@@ -55,7 +55,8 @@ MonoBehaviour:
     type: 3}
   ObjPolice2: {fileID: 4990574403166445647, guid: 3289e19e1baf85044a36881b04307ed0,
     type: 3}
-  FieldData: {fileID: 0}
+  ObjField: {fileID: 6547564419034858246, guid: 5176ed9e812452b47afea7328d413078,
+    type: 3}
 --- !u!114 &737726020
 MonoBehaviour:
   m_ObjectHideFlags: 0
