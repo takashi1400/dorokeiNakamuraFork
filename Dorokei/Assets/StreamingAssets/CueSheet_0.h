@@ -5,15 +5,15 @@
  *  ACB  Ver.        : Ver.1.31.00
  *  File Path        : /Users/koji/dorokei2/Dorokei/Assets/StreamingAssets/Public
  *  File Name        : CueSheet_0.h
- *  File Size        : 636960 bytes
- *  Date Time        : 2019/11/03 11:36:12
+ *  File Size        : 8523744 bytes
+ *  Date Time        : 2019/11/03 17:35:42
  *  Target           : Public
- *  Cues             : 11
+ *  Cues             : 15
  *  CueSheet Comment : 
  *  Stream Awb Path  : /Users/koji/dorokei2/Dorokei/Assets/StreamingAssets/Public/CueSheet_0.awb
  *===========================================================================*/
 
-#define CRI_CUESHEET_0_CUENUM (11)
+#define CRI_CUESHEET_0_CUENUM (15)
 
 /* AISAC Control List (AISAC Control ID) */
 
@@ -29,6 +29,10 @@
 #define CRI_CUESHEET_0_METORO_1COUNT_VOL2   ( 8) /*  */
 #define CRI_CUESHEET_0_METORO_TI_N_VOL1     ( 9) /*  */
 #define CRI_CUESHEET_0_METORO_TI_N_VOL2     (10) /*  */
+#define CRI_CUESHEET_0_BGM_TITLE            (11) /*  */
+#define CRI_CUESHEET_0_HAKKEN_SE            (12) /*  */
+#define CRI_CUESHEET_0_HOSHI_WIN            (13) /*  */
+#define CRI_CUESHEET_0_SATSU_WIN1           (14) /*  */
 
 /* Block List (Block Index) */
 
