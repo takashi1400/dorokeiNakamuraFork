@@ -27,6 +27,6 @@ public class Guage : MonoBehaviour
     {
         //pasttime += Time.deltaTime;
 
-        image.fillAmount = gamecontrolmanager.InputGameTimer / gamecontrolmanager.InputSpan;
+        image.fillAmount = (gamecontrolmanager.InputGameTimer < AddEffect.Phase ? gamecontrolmanager.InputGameTimer + 2 - AddEffect.Phase : gamecontrolmanager.InputGameTimer - AddEffect.Phase) / gamecontrolmanager.InputSpan;
     }
 }
