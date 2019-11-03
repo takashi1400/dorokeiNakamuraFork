@@ -33,9 +33,9 @@ public class SceneMove : MonoBehaviour
                 SceneManager.LoadScene("Stage1");
             }
         }
-        else if (SceneManager.GetActiveScene().name == "Stage1")
+        else if (SceneManager.GetActiveScene().name == "ThiefWin")
         {
-            if (Input.GetKey(KeyCode.Return))
+            if (Input.anyKey)
             {
                 SceneManager.LoadScene("Credit");
             }
