@@ -270,10 +270,9 @@ public class GameControlManager : MonoBehaviour
             InputGameTimer -= InputSpan;
             GameInputCounter++;
 
-            //isMoveTurn = false;
         }
 
-        if (1.5f < InputGameTimer || InputGameTimer < 2f)
+        if (1.5f < InputGameTimer && InputGameTimer < 2f)
         {
             // move
             if (thief_can_move)
@@ -362,6 +361,7 @@ public class GameControlManager : MonoBehaviour
             {
                 Theif.SetX(x);
                 moved = true;
+                thief_can_move = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -373,6 +373,7 @@ public class GameControlManager : MonoBehaviour
             {
                 Theif.SetX(x);
                 moved = true;
+                thief_can_move = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -384,6 +385,7 @@ public class GameControlManager : MonoBehaviour
             {
                 Theif.SetZ(z);
                 moved = true;
+                thief_can_move = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -395,6 +397,7 @@ public class GameControlManager : MonoBehaviour
             {
                 Theif.SetZ(z);
                 moved = true;
+                thief_can_move = false;
             }
 
         }
@@ -420,6 +423,7 @@ public class GameControlManager : MonoBehaviour
                 Police1.SetX(x);
                 //[(int)Charater.Police1, 0] = x;
                 moved = true;
+                police1_can_move = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.S))
@@ -433,6 +437,7 @@ public class GameControlManager : MonoBehaviour
                 //pos_buffer[(int)Charater.Police1, 0] = x;
 
                 moved = true;
+                police1_can_move = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.A))
@@ -445,6 +450,7 @@ public class GameControlManager : MonoBehaviour
                 Police1.SetZ(z);
                 //pos_buffer[(int)Charater.Police1, 1] = z;
                 moved = true;
+                police1_can_move = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.D))
@@ -457,6 +463,7 @@ public class GameControlManager : MonoBehaviour
                 Police1.SetZ(z);
                 //pos_buffer[(int)Charater.Police1, 1] = z;
                 moved = true;
+                police1_can_move = false;
             }
 
         }
@@ -479,6 +486,7 @@ public class GameControlManager : MonoBehaviour
             {
                 Police2.SetX(x);
                 moved = true;
+                police2_can_move = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.J))
@@ -490,6 +498,7 @@ public class GameControlManager : MonoBehaviour
             {
                 Police2.SetX(x);
                 moved = true;
+                police2_can_move = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.H))
@@ -512,6 +521,7 @@ public class GameControlManager : MonoBehaviour
             {
                 Police2.SetZ(z);
                 moved = true;
+                police2_can_move = false;
             }
 
         }
