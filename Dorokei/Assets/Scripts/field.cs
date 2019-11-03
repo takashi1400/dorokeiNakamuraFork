@@ -19,7 +19,7 @@ public class field : MonoBehaviour
 
     [Header("仮のステージデータ")]
     [SerializeField]
-    int[,,] StageData = new int[3, 19, 19]
+    public int[,,] StageData = new int[3, 19, 19]
     {
         {
             {1,4,4,4,4,6,4,4,4,0,0,0,0,0,0,0,0,0,0},
