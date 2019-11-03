@@ -296,6 +296,7 @@ public class GameControlManager : MonoBehaviour
             InputGameTimer -= InputSpan;
             GameInputCounter++;
 
+            // 移動できた？
             if (Theif.GetX() == Theif.GetOldX()
                 && Theif.GetZ() == Theif.GetOldZ()
                 )
@@ -305,6 +306,12 @@ public class GameControlManager : MonoBehaviour
             else
             {
                 Theif.SetVisible(false);
+            }
+
+            // ライトの上？
+            if(isLightBlock( Theif.GetX(), Theif.GetZ()))
+            {
+                Theif.SetVisible(true);
             }
 
             Theif.SetOldX(Theif.GetX());
@@ -763,4 +770,37 @@ public class GameControlManager : MonoBehaviour
             SceneManager.LoadScene("PoliceWin");
         }
     }
+
+    // 位置チェックライト
+    bool isLightBlock(int x, int z)
+    {
+        bool val = false;
+
+        // ライトチェック
+        for (int i = 0; i < TileMax; ++i)
+        {
+            bool isBreak = false;
+            for (int j = 0; j < TileMax; ++j)
+            {
+                int data = StageData[StageNo, i, j];
+                if (data == 6
+                    && x == i
+                    && z == j
+                    )
+                {
+                    val = true;
+                    isBreak = true;
+                    break;
+                }
+            }
+            if (isBreak)
+            {
+                break;
+            }
+        }
+
+        return val;
+    }
+
+
 }
