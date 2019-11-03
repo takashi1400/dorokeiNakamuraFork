@@ -47,3 +47,10 @@ MonoBehaviour:
   InputGameTimer: 0
   GameInputCounter: 0
   InputSpan: 2
+  ObjTheif: {fileID: 3573996402647873798, guid: 7aae1af2ff68fb549a4b1669df39b7a9,
+    type: 3}
+  ObjPolice1: {fileID: 8741198320862038034, guid: 8c140abc931f93747be5eac7f574a1ad,
+    type: 3}
+  ObjPolice2: {fileID: 4990574403166445647, guid: 3289e19e1baf85044a36881b04307ed0,
+    type: 3}
+  FieldData: {fileID: 0}
