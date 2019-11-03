@@ -43,6 +43,7 @@ public class GameControlManager : MonoBehaviour
     {
         int x;
         int z;
+        bool visible;
 
         public int GetX()
         {
@@ -59,6 +60,14 @@ public class GameControlManager : MonoBehaviour
         public void SetZ(int data)
         {
             z = data;
+        }
+        public bool IsVisible()
+        {
+            return visible;
+        }
+        public void SetVisible(bool val)
+        {
+            visible = val;
         }
     };
 
@@ -115,6 +124,7 @@ public class GameControlManager : MonoBehaviour
     int[] TresureNeedsData;
     int TresureNeed;
     int TresureTotalNum;
+    int TresureGotNum;
 
     // 宝物
     Tresure[] Tresures;
@@ -145,6 +155,7 @@ public class GameControlManager : MonoBehaviour
         for (int i = 0; i < TresureNumMax; ++i)
         TresureNeedsData = new int[3] { 1, 3, 3 };
         TresureNeed = TresureNeedsData[StageNo];
+        TresureGotNum = 0;
 
         for(int i=0; i<TresureNumMax; ++i)
         {
@@ -185,6 +196,7 @@ public class GameControlManager : MonoBehaviour
                              i * (-1.0f) * TileLength + TotalTileLength / 2.0f);
                     Theif.SetX(i);
                     Theif.SetZ(j);
+                    Theif.SetVisible(true);
                 }
                 else if (data == 2)
                 {
@@ -264,6 +276,7 @@ public class GameControlManager : MonoBehaviour
         MovePolice2();
 
         // 宝物実行
+        ExecTresure();
 
         // 泥棒表示
         DrawTheif();
@@ -307,6 +320,10 @@ public class GameControlManager : MonoBehaviour
     // 泥棒移動
     void MoveTheif()
     {
+        // 過去ポジション
+        int oldx = Theif.GetX();
+        int oldz = Theif.GetZ();
+
         // 泥棒
         int x = Theif.GetX();
         int z = Theif.GetZ();
@@ -354,6 +371,15 @@ public class GameControlManager : MonoBehaviour
                 pos_buffer[(int)Charater.Thief, 1] = z;
             }
 
+        }
+
+        // 現れる、現れない
+        if( oldx == x && oldz == z)
+        {
+            Theif.SetVisible(true);
+        }else
+        {
+            Theif.SetVisible(false);
         }
 
     }
@@ -554,7 +580,14 @@ public class GameControlManager : MonoBehaviour
                  0.0f,
                  x * (-1.0f) * TileLength + TotalTileLength / 2.0f);
 
-        GameObjTheif.transform.position = posTheif;
+        if(Theif.IsVisible())
+        {
+            GameObjTheif.transform.position = posTheif;
+        }
+        else
+        {
+            GameObjTheif.transform.position = new Vector3(-100, 0, -100);
+        }
     }
 
     // 警察表示1
@@ -609,7 +642,13 @@ public class GameControlManager : MonoBehaviour
                 && z == Tresures[i].GetZ()
                 )
             {
-                val = false;
+                // 宝物ゲット!
+                Tresures[i].SetAlive(false);
+                Tresures[i].SetX(-100);
+                Tresures[i].SetZ(-100);
+
+                TresureObjects[i].transform.position = new Vector3(-100, 0, -100);
+                ++TresureGotNum;
                 break;
             }
         }
