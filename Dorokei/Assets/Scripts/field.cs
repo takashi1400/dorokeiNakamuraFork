@@ -229,4 +229,25 @@ public class field : MonoBehaviour
     {
         
     }
+
+    // public
+    public int GetTileMax()
+    {
+        return TileMax;
+    }
+
+    public float GetTileLength()
+    {
+        return TileLength;
+    }
+
+    public int[] GetStageTileMax()
+    {
+        return StageTileMax;
+    }
+
+    public int[,,] GetStageData()
+    {
+        return StageData;
+    }
 }
