@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Stage1.unity
     guid: 17eb94016bfb0794aa578b3c036ae253
   - enabled: 1
+    path: Assets/Scenes/ThiefWin.unity
+    guid: 0bec9ffe96b2f4b5e895667b4bc408f2
+  - enabled: 1
     path: Assets/Scenes/Credit.unity
     guid: d0bd78783e9986e4cbb04e2202e6f726
   m_configObjects: {}
