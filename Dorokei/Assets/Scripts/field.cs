@@ -116,7 +116,7 @@ public class field : MonoBehaviour
                 float heightAdjust = 0.0f;
                 float xAdjust = 0.0f;
                 float zAdjust = 0.0f;
-                Debug.Log(data);
+                //Debug.Log(data);
                 if(data > 0)
                 {
                     GameObject obj;
