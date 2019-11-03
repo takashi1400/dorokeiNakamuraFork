@@ -337,27 +337,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &737726019 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6694812772622995063, guid: 92bbc038a47f61a47ad8867a1d9a2992,
-    type: 3}
-  m_PrefabInstance: {fileID: 1153129648}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &737726020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737726019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3232eb233eb63c4eb1e1ebbc4ae73d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textCountdown_number: {fileID: 967934148}
-  _textCountdown_start: {fileID: 2034063694}
-  _imageMask: {fileID: 369236081}
 --- !u!114 &967934148 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2829496459995478674, guid: 0f88a37ac9cc7b142be8abe95ce398c2,
@@ -437,6 +416,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9118819740502697261, guid: 92bbc038a47f61a47ad8867a1d9a2992,
+        type: 3}
+      propertyPath: FieldData
+      value: 
+      objectReference: {fileID: 8176507047079111069}
+    - target: {fileID: 737726020, guid: 92bbc038a47f61a47ad8867a1d9a2992, type: 3}
+      propertyPath: _textCountdown_number
+      value: 
+      objectReference: {fileID: 967934148}
+    - target: {fileID: 737726020, guid: 92bbc038a47f61a47ad8867a1d9a2992, type: 3}
+      propertyPath: _textCountdown_start
+      value: 
+      objectReference: {fileID: 2034063694}
+    - target: {fileID: 737726020, guid: 92bbc038a47f61a47ad8867a1d9a2992, type: 3}
+      propertyPath: _imageMask
+      value: 
+      objectReference: {fileID: 369236081}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92bbc038a47f61a47ad8867a1d9a2992, type: 3}
 --- !u!114 &2034063694 stripped
