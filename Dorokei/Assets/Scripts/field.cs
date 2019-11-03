@@ -178,11 +178,17 @@ public class field : MonoBehaviour
                 if( i == 0 || i == StageTileMax[StageNo] + 1)
                 {
                     if(j <= StageTileMax[StageNo] + 1)
-                    view = true;
+                    {
+                        view = true;
+                    }
                 }
                 if( j == 0 || j == StageTileMax[StageNo] + 1)
                 {
-                    view = true;
+                    if (i <= StageTileMax[StageNo] + 1)
+                    {
+                        view = true;
+
+                    }
                 }
                 if(view)
                 {
