@@ -62,10 +62,60 @@ public class GameControlManager : MonoBehaviour
         }
     };
 
+    // 宝物クラス
+    class Tresure
+    {
+        int x;
+        int z;
+        int type;
+        bool flagAlive;
+
+        public int GetX()
+        {
+            return x;
+        }
+        public void SetX(int data)
+        {
+            x = data;
+        }
+        public int GetZ()
+        {
+            return z;
+        }
+        public void SetZ(int data)
+        {
+            z = data;
+        }
+        public int GetType()
+        {
+            return type;
+        }
+        public void SetType(int val)
+        {
+            type = val;
+        }
+        public bool isAlive()
+        {
+            return flagAlive;
+        }
+        public void SetAlive( bool isAlive)
+        {
+            flagAlive = isAlive;
+        }
+    };
+
     // 泥棒
     PlayerBase Theif;
     PlayerBase Police1;
     PlayerBase Police2;
+
+    [Header("宝物最大数")]
+    [SerializeField]
+    int TresureNumMax = 6;
+    int TresureTotalNum;
+
+    // 宝物
+    Tresure[] Tresures;
 
 
     // Start is called before the first frame update
@@ -75,6 +125,18 @@ public class GameControlManager : MonoBehaviour
         Theif = new PlayerBase();
         Police1 = new PlayerBase();
         Police2 = new PlayerBase();
+
+        // 宝物
+        TresureTotalNum = 0;
+        Tresures = new Tresure[TresureNumMax];
+        for(int i=0; i<TresureNumMax; ++i)
+        {
+            Tresures[i] = new Tresure();
+            Tresures[i].SetX(-1);
+            Tresures[i].SetZ(-1);
+            Tresures[i].SetAlive(false);
+            Tresures[i].SetType(0);
+        }
 
         GameTimer = 0.0f;
         InputGameTimer = 0.0f;
@@ -124,9 +186,17 @@ public class GameControlManager : MonoBehaviour
                     Police2.SetX(i);
                     Police2.SetZ(j);
                 }
+                else if(data==7 || data==8 || data==9)
+                {
+                    Tresures[TresureTotalNum].SetX(i);
+                    Tresures[TresureTotalNum].SetZ(j);
+                    Tresures[TresureTotalNum].SetAlive(true);
+                    Tresures[TresureTotalNum].SetType(data);
+
+                    ++TresureTotalNum;
+                }
             }
         }
-        Debug.Log(posTheif);
 
         GameObjTheif = Instantiate(ObjTheif, posTheif, Quaternion.identity);
         GameObjPolice1 = Instantiate(ObjPolice1, posPolice1, Quaternion.identity);
@@ -164,38 +234,44 @@ public class GameControlManager : MonoBehaviour
     void MoveTheif()
     {
         // 泥棒
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        int x = Theif.GetX();
+        int z = Theif.GetZ();
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            int x = Theif.GetX();
             x -= 1;
-            if (x >= 0)
+            if (x >= 0
+                && isMovableTheif(x, z)
+                )
             {
                 Theif.SetX(x);
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            int x = Theif.GetX();
             x += 1;
-            if (x < StageTileNumMax)
+            if (x < StageTileNumMax
+                && isMovableTheif(x, z)
+                )
             {
                 Theif.SetX(x);
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            int z = Theif.GetZ();
             z -= 1;
-            if (z >= 0)
+            if (z >= 0
+                && isMovableTheif(x, z)
+                )
             {
                 Theif.SetZ(z);
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            int z = Theif.GetZ();
             z += 1;
-            if (z < StageTileNumMax)
+            if (z < StageTileNumMax
+                && isMovableTheif(x, z)
+                )
             {
                 Theif.SetZ(z);
             }
@@ -208,89 +284,175 @@ public class GameControlManager : MonoBehaviour
     void MovePolice1()
     {
         // 泥棒
+        int x = Police1.GetX();
+        int z = Police1.GetZ();
         if (Input.GetKeyDown(KeyCode.W))
         {
-            int x = Police1.GetX();
             x -= 1;
-            if (x >= 0)
+            if (x >= 0
+                && isMovablePolice(x, z)
+                )
             {
                 Police1.SetX(x);
             }
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            int x = Police1.GetX();
             x += 1;
-            if (x < StageTileNumMax)
+            if (x < StageTileNumMax
+                && isMovablePolice(x, z)
+                )
             {
                 Police1.SetX(x);
             }
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            int z = Police1.GetZ();
             z -= 1;
-            if (z >= 0)
+            if (z >= 0
+                && isMovablePolice(x, z)
+                )
             {
                 Police1.SetZ(z);
             }
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            int z = Police1.GetZ();
             z += 1;
-            if (z < StageTileNumMax)
+            if (z < StageTileNumMax
+                && isMovablePolice(x, z)
+                )
             {
                 Police1.SetZ(z);
             }
 
         }
-
     }
 
     // 警察1移動
     void MovePolice2()
     {
         // 泥棒
+        int x = Police2.GetX();
+        int z = Police2.GetZ();
         if (Input.GetKeyDown(KeyCode.U))
         {
-            int x = Police2.GetX();
             x -= 1;
-            if (x >= 0)
+            if (x >= 0
+                && isMovablePolice(x, z)
+                )
             {
                 Police2.SetX(x);
             }
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
-            int x = Police2.GetX();
             x += 1;
-            if (x < StageTileNumMax)
+            if (x < StageTileNumMax
+                && isMovablePolice(x, z)
+                )
             {
                 Police2.SetX(x);
             }
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
-            int z = Police2.GetZ();
             z -= 1;
-            if (z >= 0)
+            if (z >= 0
+                && isMovablePolice(x, z)
+                )
             {
                 Police2.SetZ(z);
             }
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
-            int z = Police2.GetZ();
             z += 1;
-            if (z < StageTileNumMax)
+            if (z < StageTileNumMax
+                && isMovablePolice(x, z)
+                )
             {
                 Police2.SetZ(z);
             }
 
         }
-
     }
+
+    // 位置チェック宝物
+    bool isMovableTheif( int x, int z )
+    {
+        bool val = true;
+
+        // 障害物チェック
+        for (int i = 0; i < TileMax; ++i)
+        {
+            bool isBreak = false;
+            for (int j = 0; j < TileMax; ++j)
+            {
+                int data = StageData[StageNo, i, j];
+                if (data == 5
+                    && x == i
+                    && z == j
+                    )
+                {
+                    val = false;
+                    isBreak = true;
+                    break;
+                }
+            }
+            if (isBreak)
+            {
+                break;
+            }
+        }
+
+        return val;
+    }
+
+    // 位置チェック警察
+    bool isMovablePolice( int x, int z)
+    {
+        bool val = true;
+
+        // 宝物チェック
+        for (int i=0; i<TresureTotalNum; ++i)
+        {
+            if( Tresures[i].isAlive()
+                && x == Tresures[i].GetX()
+                && z == Tresures[i].GetZ()
+                )
+            {
+                val = false;
+                break;
+            }
+        }
+
+        // 障害物チェック
+        for (int i = 0; i < TileMax; ++i)
+        {
+            bool isBreak = false;
+            for (int j = 0; j < TileMax; ++j)
+            {
+                int data = StageData[StageNo, i, j];
+                if( data==5
+                    && x == i
+                    && z == j
+                    )
+                {
+                    val = false;
+                    isBreak = true;
+                    break;
+                }
+            }
+            if(isBreak)
+            {
+                break;
+            }
+        }
+
+        return val;
+    }
+
 
     // 泥棒表示
     void DrawTheif()
