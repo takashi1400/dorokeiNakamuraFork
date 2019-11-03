@@ -785,7 +785,6 @@ public class CriAtom : MonoBehaviour
 			CriAtom.instance = null;
 		}
 	}
-
 	private void Awake()
 	{
 		if (CriAtom.instance != null && CriAtom.instance != this) {
