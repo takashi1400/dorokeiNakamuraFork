@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameControlManager : MonoBehaviour
 {
     // public
     [Header("ゲームタイマー")]
     public float GameTimer;
+    [Header("入力用ゲームタイマー")]
+    public float InputGameTimer;
 
     [Header("入力回数")]
     public int GameInputCounter;
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GameTimer = 0.0f;
+        InputGameTimer = 0.0f;
         GameInputCounter = 0;
     }
 
@@ -27,6 +30,14 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // count timer
+        float preInputTimer = InputGameTimer;
         GameTimer += Time.deltaTime;
+        InputGameTimer += Time.deltaTime;
+        // input counter
+        if(InputGameTimer > InputSpan )
+        {
+            InputGameTimer -= InputSpan;
+            GameInputCounter++;
+        }
     }
 }
