@@ -399,19 +399,6 @@ public class GameControlManager : MonoBehaviour
 
         }
 
-<<<<<<< HEAD
-        // 現れる、現れない
-        if( oldx == x && oldz == z)
-        {
-            Theif.SetVisible(true);
-        }else
-        {
-            Theif.SetVisible(false);
-        }
-=======
-        return moved;
->>>>>>> 07718d94e453f7f1907270543d44c345e57f16eb
-
     }
 
     // 警察1移動
