@@ -44,6 +44,8 @@ public class GameControlManager : MonoBehaviour
         int x;
         int z;
         bool visible;
+        int oldx;
+        int oldz;
 
         public int GetX()
         {
@@ -68,6 +70,22 @@ public class GameControlManager : MonoBehaviour
         public void SetVisible(bool val)
         {
             visible = val;
+        }
+        public int GetOldX()
+        {
+            return oldx;
+        }
+        public void SetOldX(int data)
+        {
+            oldx = data;
+        }
+        public int GetOldZ()
+        {
+            return oldz;
+        }
+        public void SetOldZ(int data)
+        {
+            oldz = data;
         }
     };
 
@@ -115,6 +133,8 @@ public class GameControlManager : MonoBehaviour
 
     // 泥棒
     PlayerBase Theif;
+
+    // 警察
     PlayerBase Police1;
     PlayerBase Police2;
 
@@ -197,6 +217,8 @@ public class GameControlManager : MonoBehaviour
                     Theif.SetX(i);
                     Theif.SetZ(j);
                     Theif.SetVisible(true);
+                    Theif.SetOldX(-1);
+                    Theif.SetOldZ(-1);
                 }
                 else if (data == 2)
                 {
@@ -270,6 +292,18 @@ public class GameControlManager : MonoBehaviour
             InputGameTimer -= InputSpan;
             GameInputCounter++;
 
+            if(Theif.GetX() == Theif.GetOldX()
+                && Theif.GetZ() == Theif.GetOldZ()
+                )
+            {
+                Theif.SetVisible(true);
+            }else
+            {
+                Theif.SetVisible(false);
+            }
+
+            Theif.SetOldX(Theif.GetX());
+            Theif.SetOldZ(Theif.GetZ());
             //isMoveTurn = false;
         }
 
