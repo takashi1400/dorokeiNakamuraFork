@@ -14,10 +14,19 @@ public class SceneMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKey)
+        if (SceneManager.GetActiveScene().name == "Start")
         {
-
-            SceneManager.LoadScene("Stage1");
+            if (Input.anyKey)
+            {
+                SceneManager.LoadScene("Stage1");
+            }
+        }
+        else  if (SceneManager.GetActiveScene().name == "Stage1")
+        {
+            if (Input.GetKey(KeyCode.Return))
+            {
+                SceneManager.LoadScene("Credit");
+            }
         }
     }
 }
