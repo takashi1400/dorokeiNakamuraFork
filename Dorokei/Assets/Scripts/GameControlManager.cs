@@ -202,6 +202,27 @@ public class GameControlManager : MonoBehaviour
                     Tresures[TresureTotalNum].SetAlive(true);
                     Tresures[TresureTotalNum].SetType(data);
 
+                    GameObject obj = null;
+                    switch(data)
+                    {
+                        case 7:
+                            obj = ObjTresureA;
+                            break;
+                        case 8:
+                            obj = ObjTresureB;
+                            break;
+                        case 9:
+                            obj = ObjTresureC;
+                            break;
+                        default:
+                            obj = null;
+                            break;
+                    }
+
+                    TresureObjects[TresureTotalNum] =
+                        Instantiate(obj, new Vector3(j * TileLength - TotalTileLength / 2.0f - 1.0f, 1.0f,
+                            i * (-1.0f) * TileLength + TotalTileLength / 2.0f + 1.0f), Quaternion.identity);
+
                     ++TresureTotalNum;
                 }
             }

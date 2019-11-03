@@ -567,6 +567,24 @@ PrefabInstance:
       propertyPath: ObjField
       value: 
       objectReference: {fileID: 8176507047079111068}
+    - target: {fileID: 9118819740502697261, guid: 92bbc038a47f61a47ad8867a1d9a2992,
+        type: 3}
+      propertyPath: ObjTresureA
+      value: 
+      objectReference: {fileID: 5735382242310405633, guid: af1bdd255c7054269802b73ac2190328,
+        type: 3}
+    - target: {fileID: 9118819740502697261, guid: 92bbc038a47f61a47ad8867a1d9a2992,
+        type: 3}
+      propertyPath: ObjTresureB
+      value: 
+      objectReference: {fileID: 6359034745228677644, guid: 93e43ef63903541f48668f8246ca8f89,
+        type: 3}
+    - target: {fileID: 9118819740502697261, guid: 92bbc038a47f61a47ad8867a1d9a2992,
+        type: 3}
+      propertyPath: ObjTresureC
+      value: 
+      objectReference: {fileID: 2250372704320020825, guid: 2ced2dcaf69ce4c6ba8b32bedef9984f,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 737726020, guid: 92bbc038a47f61a47ad8867a1d9a2992, type: 3}
     - {fileID: 6467937656480375833, guid: 92bbc038a47f61a47ad8867a1d9a2992, type: 3}
