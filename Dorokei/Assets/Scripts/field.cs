@@ -86,6 +86,10 @@ public class field : MonoBehaviour
         },
     };
 
+    public GameObject[] GameObjTresuresA;
+    public GameObject[] GameObjTresuresB;
+    public GameObject[] GameObjTresuresC;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -116,10 +120,13 @@ public class field : MonoBehaviour
                 if(data > 0)
                 {
                     GameObject obj;
+                    GameObject objTresure = null;
+                    bool isTresure = false;
                     switch (data)
                     {
                         default:
                             obj = null;
+                            objTresure = null;
                             break;
                         case 1:
                             obj = ObjTile;
@@ -141,21 +148,27 @@ public class field : MonoBehaviour
                             obj = ObjLight;
                             break;
                         case 7:
-                            obj = ObjTresureA;
-                            heightAdjust = 1.0f;
-                            xAdjust = -1.5f;
+                            isTresure = true;
+                            objTresure = ObjTresureA;
+                            obj = ObjTile;
+                            heightAdjust = 0.0f;
+                            xAdjust = -0.0f;
                             zAdjust = -0.0f;
                             break;
                         case 8:
-                            obj = ObjTresureB;
-                            heightAdjust = 1.0f;
-                            xAdjust = -1.5f;
+                            isTresure = true;
+                            objTresure = ObjTresureB;
+                            obj = ObjTile;
+                            heightAdjust = 0.0f;
+                            xAdjust = -0.0f;
                             zAdjust = -0.0f;
                             break;
                         case 9:
-                            obj = ObjTresureC;
-                            heightAdjust = 1.0f;
-                            xAdjust = -1.5f;
+                            isTresure = true;
+                            objTresure = ObjTresureC;
+                            obj = ObjTile;
+                            heightAdjust = 0.0f;
+                            xAdjust = -0.0f;
                             zAdjust = -0.0f;
                             break;
                     }
@@ -163,6 +176,13 @@ public class field : MonoBehaviour
                         heightAdjust,
                         i * (-1.0f) * TileLength + TotalTileLength / 2.0f + zAdjust),
                         Quaternion.identity);
+                    if( isTresure )
+                    {
+                        Instantiate(objTresure, new Vector3(j * TileLength - TotalTileLength / 2.0f + xAdjust,
+                            1.0f,
+                            i * (-1.0f) * TileLength + TotalTileLength / 2.0f + zAdjust),
+                            Quaternion.identity);
+                    }
                 }
             }
         }
@@ -197,6 +217,9 @@ public class field : MonoBehaviour
                 }
             }
         }
+
+        // 宝物置く
+
     }
 
     // Update is called once per frame
