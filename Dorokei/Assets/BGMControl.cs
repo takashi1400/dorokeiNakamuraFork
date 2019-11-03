@@ -10,6 +10,8 @@ public class BGMControl : MonoBehaviour
     CriAtomSource criSource;
     int period = -1;
 
+    public bool IsPinch;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +36,17 @@ public class BGMControl : MonoBehaviour
 
     private void SoundPlay()
     {
-        //サウンドパターン入れ替え
-        criSource.cueName = (period % 2 == 0) ? "chase1" : "chase2";
+        if (IsPinch)
+        {
+
+            //サウンドパターン入れ替え
+            criSource.cueName = (period % 2 == 0) ? "chase3" : "chase4";
+        }
+        else
+        {
+            //サウンドパターン入れ替え
+            criSource.cueName = (period % 2 == 0) ? "chase1" : "chase2";
+        }
         this.criSource.Play();
     }
 }
