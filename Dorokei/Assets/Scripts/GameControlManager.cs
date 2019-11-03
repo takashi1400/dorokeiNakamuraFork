@@ -174,11 +174,11 @@ public class GameControlManager : MonoBehaviour
         Tresures = new Tresure[TresureNumMax];
         TresureObjects = new GameObject[TresureNumMax];
         for (int i = 0; i < TresureNumMax; ++i)
-        TresureNeedsData = new int[3] { 1, 3, 3 };
+            TresureNeedsData = new int[3] { 1, 3, 3 };
         TresureNeed = TresureNeedsData[StageNo];
         TresureGotNum = 0;
 
-        for(int i=0; i<TresureNumMax; ++i)
+        for (int i = 0; i < TresureNumMax; ++i)
         {
             Tresures[i] = new Tresure();
             Tresures[i].SetX(-1);
@@ -245,7 +245,7 @@ public class GameControlManager : MonoBehaviour
                     Tresures[TresureTotalNum].SetType(data);
 
                     GameObject obj = null;
-                    switch(data)
+                    switch (data)
                     {
                         case 7:
                             obj = ObjTresureA;
@@ -293,12 +293,13 @@ public class GameControlManager : MonoBehaviour
             InputGameTimer -= InputSpan;
             GameInputCounter++;
 
-            if(Theif.GetX() == Theif.GetOldX()
+            if (Theif.GetX() == Theif.GetOldX()
                 && Theif.GetZ() == Theif.GetOldZ()
                 )
             {
                 Theif.SetVisible(true);
-            }else
+            }
+            else
             {
                 Theif.SetVisible(false);
             }
@@ -338,6 +339,10 @@ public class GameControlManager : MonoBehaviour
         // 宝物実行
         ExecTresure();
 
+        // 捕まえた実行
+        ExecCapture();
+
+
         // 泥棒表示
         DrawTheif();
 
@@ -346,7 +351,8 @@ public class GameControlManager : MonoBehaviour
         DrawPolice2();
     }
 
-    enum Charater {
+    enum Charater
+    {
         Thief,
         Police1,
         Police2,
@@ -369,8 +375,8 @@ public class GameControlManager : MonoBehaviour
         if (pos_buffer[(int)Charater.Police2, 0] != -1) Police2.SetX(pos_buffer[(int)Charater.Police2, 0]);
         if (pos_buffer[(int)Charater.Police2, 1] != -1) Police2.SetZ(pos_buffer[(int)Charater.Police2, 1]);
 
-        for(int i = 0; i< 3; ++i)
-            for(int j = 0; j < 2; ++j)
+        for (int i = 0; i < 3; ++i)
+            for (int j = 0; j < 2; ++j)
             {
                 pos_buffer[i, j] = -1;
             }
@@ -378,7 +384,7 @@ public class GameControlManager : MonoBehaviour
     }
 
     // 泥棒移動
-    bool  MoveTheif()
+    bool MoveTheif()
     {
         // 過去ポジション
         int oldx = Theif.GetX();
@@ -565,7 +571,7 @@ public class GameControlManager : MonoBehaviour
     }
 
     // 位置チェック宝物
-    bool isMovableTheif( int x, int z )
+    bool isMovableTheif(int x, int z)
     {
         bool val = true;
 
@@ -596,14 +602,14 @@ public class GameControlManager : MonoBehaviour
     }
 
     // 位置チェック警察
-    bool isMovablePolice( int x, int z)
+    bool isMovablePolice(int x, int z)
     {
         bool val = true;
 
         // 宝物チェック
-        for (int i=0; i<TresureTotalNum; ++i)
+        for (int i = 0; i < TresureTotalNum; ++i)
         {
-            if( Tresures[i].isAlive()
+            if (Tresures[i].isAlive()
                 && x == Tresures[i].GetX()
                 && z == Tresures[i].GetZ()
                 )
@@ -620,7 +626,7 @@ public class GameControlManager : MonoBehaviour
             for (int j = 0; j < TileMax; ++j)
             {
                 int data = StageData[StageNo, i, j];
-                if( data==5
+                if (data == 5
                     && x == i
                     && z == j
                     )
@@ -630,7 +636,7 @@ public class GameControlManager : MonoBehaviour
                     break;
                 }
             }
-            if(isBreak)
+            if (isBreak)
             {
                 break;
             }
@@ -654,7 +660,7 @@ public class GameControlManager : MonoBehaviour
                  0.0f,
                  x * (-1.0f) * TileLength + TotalTileLength / 2.0f);
 
-        if(Theif.IsVisible())
+        if (Theif.IsVisible())
         {
             GameObjTheif.transform.position = posTheif;
         }
@@ -733,5 +739,25 @@ public class GameControlManager : MonoBehaviour
             }
         }
 
+    }
+
+    // 捕まえたか実行
+    void ExecCapture()
+    {
+        bool val = false;
+        if(Theif.GetX() == Police1.GetX()
+            && Theif.GetZ() == Police1.GetZ())
+        {
+            val = true;
+        }else if (Theif.GetX() == Police2.GetX()
+            && Theif.GetZ() == Police2.GetZ())
+        {
+            val = true;
+        }
+
+        if(val == true)
+        {
+            SceneManager.LoadScene("Start");
+        }
     }
 }
