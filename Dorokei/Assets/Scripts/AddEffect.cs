@@ -13,6 +13,7 @@ public class AddEffect : MonoBehaviour
     float effect_start = 0.7f;
     GameObject contollerobject;
     GameControlManager gamecontrolmanager;
+    static public float Phase = 1.3f;
     Color original_color;
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class AddEffect : MonoBehaviour
     void Update()
     {
         //pasttime += Time.deltaTime;
-        var float_val = gamecontrolmanager.InputGameTimer / gamecontrolmanager.InputSpan;// pasttime - System.Math.Truncate(pasttime);
+        var float_val = (gamecontrolmanager.InputGameTimer < Phase ? gamecontrolmanager.InputGameTimer + 2 - Phase : gamecontrolmanager.InputGameTimer - Phase) / gamecontrolmanager.InputSpan;// pasttime - System.Math.Truncate(pasttime);
 
         if (float_val > effect_start)
         {
