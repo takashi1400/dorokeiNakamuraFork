@@ -48,7 +48,7 @@ public class GameControlManager : MonoBehaviour
         {
             return x;
         }
-        public void SetX( int data)
+        public void SetX(int data)
         {
             x = data;
         }
@@ -98,7 +98,7 @@ public class GameControlManager : MonoBehaviour
         {
             return flagAlive;
         }
-        public void SetAlive( bool isAlive)
+        public void SetAlive(bool isAlive)
         {
             flagAlive = isAlive;
         }
@@ -138,7 +138,7 @@ public class GameControlManager : MonoBehaviour
         TresureTotalNum = 0;
         Tresures = new Tresure[TresureNumMax];
         TresureObjects = new GameObject[TresureNumMax];
-        for(int i=0; i<TresureNumMax; ++i)
+        for (int i = 0; i < TresureNumMax; ++i)
         {
             Tresures[i] = new Tresure();
             Tresures[i].SetX(-1);
@@ -195,7 +195,7 @@ public class GameControlManager : MonoBehaviour
                     Police2.SetX(i);
                     Police2.SetZ(j);
                 }
-                else if(data==7 || data==8 || data==9)
+                else if (data == 7 || data == 8 || data == 9)
                 {
                     Tresures[TresureTotalNum].SetX(i);
                     Tresures[TresureTotalNum].SetZ(j);
@@ -220,10 +220,13 @@ public class GameControlManager : MonoBehaviour
         GameTimer += Time.deltaTime;
         InputGameTimer += Time.deltaTime;
         // input counter
-        if(InputGameTimer > InputSpan )
+        if (InputGameTimer > InputSpan)
         {
             InputGameTimer -= InputSpan;
             GameInputCounter++;
+
+            ReflectPosition();
+            Debug.Log("sss");
         }
 
         // move
@@ -239,6 +242,37 @@ public class GameControlManager : MonoBehaviour
         DrawPolice2();
     }
 
+    enum Charater {
+        Thief,
+        Police1,
+        Police2,
+    }
+    int[,] pos_buffer = new int[3, 2]{
+        { -1,-1, },
+        { -1,-1, },
+        { -1,-1, },
+    };
+
+    //position 反映
+    void ReflectPosition()
+    {
+        if (pos_buffer[(int)Charater.Thief, 0] != -1) Theif.SetX(pos_buffer[(int)Charater.Thief, 0]);
+        if (pos_buffer[(int)Charater.Thief, 1] != -1) Theif.SetZ(pos_buffer[(int)Charater.Thief, 1]);
+
+        if (pos_buffer[(int)Charater.Police1, 0] != -1) Police1.SetX(pos_buffer[(int)Charater.Police1, 0]);
+        if (pos_buffer[(int)Charater.Police1, 1] != -1) Police1.SetZ(pos_buffer[(int)Charater.Police1, 1]);
+
+        if (pos_buffer[(int)Charater.Police2, 0] != -1) Police2.SetX(pos_buffer[(int)Charater.Police2, 0]);
+        if (pos_buffer[(int)Charater.Police2, 1] != -1) Police2.SetZ(pos_buffer[(int)Charater.Police2, 1]);
+
+        for(int i = 0; i< 3; ++i)
+            for(int j = 0; j < 2; ++j)
+            {
+                pos_buffer[i, j] = -1;
+            }
+
+    }
+
     // 泥棒移動
     void MoveTheif()
     {
@@ -252,7 +286,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovableTheif(x, z)
                 )
             {
-                Theif.SetX(x);
+                //Theif.SetX(x);
+                pos_buffer[(int)Charater.Thief, 0] = x;
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -262,7 +297,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovableTheif(x, z)
                 )
             {
-                Theif.SetX(x);
+                //Theif.SetX(x);
+                pos_buffer[(int)Charater.Thief, 0] = x;
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -272,7 +308,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovableTheif(x, z)
                 )
             {
-                Theif.SetZ(z);
+                //Theif.SetZ(z);
+                pos_buffer[(int)Charater.Thief, 1] = z;
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -282,7 +319,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovableTheif(x, z)
                 )
             {
-                Theif.SetZ(z);
+                //Theif.SetZ(z);
+                pos_buffer[(int)Charater.Thief, 1] = z;
             }
 
         }
@@ -302,7 +340,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                Police1.SetX(x);
+                //Police1.SetX(x);
+                pos_buffer[(int)Charater.Police1, 0] = x;
             }
         }
         if (Input.GetKeyDown(KeyCode.S))
@@ -312,7 +351,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                Police1.SetX(x);
+                //Police1.SetX(x);
+                pos_buffer[(int)Charater.Police1, 0] = x;
             }
         }
         if (Input.GetKeyDown(KeyCode.A))
@@ -322,7 +362,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                Police1.SetZ(z);
+                //Police1.SetZ(z);
+                pos_buffer[(int)Charater.Police1, 1] = z;
             }
         }
         if (Input.GetKeyDown(KeyCode.D))
@@ -332,7 +373,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                Police1.SetZ(z);
+                //Police1.SetZ(z);
+                pos_buffer[(int)Charater.Police1, 1] = z;
             }
 
         }
@@ -351,7 +393,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                Police2.SetX(x);
+                //Police2.SetX(x);
+                pos_buffer[(int)Charater.Police2, 0] = x;
             }
         }
         if (Input.GetKeyDown(KeyCode.J))
@@ -361,7 +404,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                Police2.SetX(x);
+                //Police2.SetX(x);
+                pos_buffer[(int)Charater.Police2, 0] = x;
             }
         }
         if (Input.GetKeyDown(KeyCode.H))
@@ -371,7 +415,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                Police2.SetZ(z);
+                //Police2.SetZ(z);
+                pos_buffer[(int)Charater.Police2, 1] = z;
             }
         }
         if (Input.GetKeyDown(KeyCode.K))
@@ -381,7 +426,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                Police2.SetZ(z);
+                //Police2.SetZ(z);
+                pos_buffer[(int)Charater.Police2, 1] = z;
             }
 
         }
