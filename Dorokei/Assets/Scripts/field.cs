@@ -195,7 +195,9 @@ public class field : MonoBehaviour
             for (int j = 0; j<TileMax+2; ++j)
             {
                 bool view = false;
-                if( i == 0 || i == StageTileMax[StageNo] + 1)
+                if( i == 0
+                    //|| i == StageTileMax[StageNo] + 1
+                    )
                 {
                     if(j <= StageTileMax[StageNo] + 1)
                     {
@@ -204,7 +206,7 @@ public class field : MonoBehaviour
                 }
                 if( j == 0 || j == StageTileMax[StageNo] + 1)
                 {
-                    if (i <= StageTileMax[StageNo] + 1)
+                    if (i <= StageTileMax[StageNo])
                     {
                         view = true;
 
