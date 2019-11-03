@@ -34,6 +34,7 @@ public class GameControlManager : MonoBehaviour
     int TileMax;
     float TileLength;
     int[] StageTileMax;
+    int StageTileNumMax;
     int[,,] StageData;
     float TotalTileLength;
 
@@ -83,9 +84,10 @@ public class GameControlManager : MonoBehaviour
         TileMax = ObjField.GetComponent<field>().TileMax;
         TileLength = ObjField.GetComponent<field>().TileLength;
         StageTileMax = ObjField.GetComponent<field>().StageTileMax;
+        StageTileNumMax = StageTileMax[StageNo];
         StageData = ObjField.GetComponent<field>().StageData;
 
-        TotalTileLength = TileLength * StageTileMax[StageNo];
+        TotalTileLength = TileLength * StageTileNumMax;
 
 
         Vector3 posTheif = new Vector3(3, 0, 0);
@@ -146,6 +148,7 @@ public class GameControlManager : MonoBehaviour
         }
 
         // input
+        InputPlayer();
 
         // 泥棒表示
         DrawTheif();
@@ -155,7 +158,51 @@ public class GameControlManager : MonoBehaviour
         DrawPolice2();
     }
 
+    // プレイヤー入力
+    void InputPlayer()
+    {
+        // 泥棒
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            int x = Theif.GetX();
+            x -= 1;
+            if (x >= 0)
+            {
+                Theif.SetX(x);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            int x = Theif.GetX();
+            x += 1;
+            if (x < StageTileNumMax)
+            {
+                Theif.SetX(x);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            int z = Theif.GetZ();
+            z -= 1;
+            if (z >= 0)
+            {
+                Theif.SetZ(z);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            int z = Theif.GetZ();
+            z += 1;
+            if (z < StageTileNumMax)
+            {
+                Theif.SetZ(z);
+            }
 
+        }
+
+    }
+
+    // 泥棒表示
     void DrawTheif()
     {
         Vector3 posTheif = new Vector3(3, 0, 0);
@@ -172,6 +219,7 @@ public class GameControlManager : MonoBehaviour
         GameObjTheif.transform.position = posTheif;
     }
 
+    // 警察表示1
     void DrawPolice1()
     {
         Vector3 posPolice = new Vector3(3, 0, 0);
@@ -188,6 +236,7 @@ public class GameControlManager : MonoBehaviour
         GameObjPolice1.transform.position = posPolice;
     }
 
+    // 警察表示2
     void DrawPolice2()
     {
         Vector3 posPolice = new Vector3(3, 0, 0);
