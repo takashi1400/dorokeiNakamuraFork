@@ -288,6 +288,8 @@ public class GameControlManager : MonoBehaviour
             police2_can_move = true;
         }
 
+        // 宝物実行
+
         // 泥棒表示
         DrawTheif();
 
@@ -627,4 +629,28 @@ public class GameControlManager : MonoBehaviour
         GameObjPolice2.transform.position = posPolice;
     }
 
+    // 宝物実行
+    void ExecTresure()
+    {
+        int x;
+        int z;
+
+        // 泥棒位置
+        x = Theif.GetX();
+        z = Theif.GetZ();
+
+        // 宝物チェック
+        for (int i = 0; i < TresureTotalNum; ++i)
+        {
+            if (Tresures[i].isAlive()
+                && x == Tresures[i].GetX()
+                && z == Tresures[i].GetZ()
+                )
+            {
+                val = false;
+                break;
+            }
+        }
+
+    }
 }
