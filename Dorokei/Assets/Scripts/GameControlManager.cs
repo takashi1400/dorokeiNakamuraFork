@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameControlManager : MonoBehaviour
@@ -711,6 +712,12 @@ public class GameControlManager : MonoBehaviour
 
                 TresureObjects[i].transform.position = new Vector3(-100, 0, -100);
                 ++TresureGotNum;
+
+                // 泥棒勝った？
+                if (++TresureGotNum >= TresureNeed)
+                {
+                    SceneManager.LoadScene("Start");
+                }
                 break;
             }
         }
