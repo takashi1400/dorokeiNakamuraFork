@@ -17,10 +17,15 @@ public class GameControlManager : MonoBehaviour
     [SerializeField]
     public float InputSpan = 2.0f;
 
-    // 泥棒、警察
+    // 泥棒、警察 prefab
     public GameObject ObjTheif;
     public GameObject ObjPolice1;
     public GameObject ObjPolice2;
+
+    // 泥棒、警察 本体
+    GameObject GameObjTheif;
+    GameObject GameObjPolice1;
+    GameObject GameObjPolice2;
 
     // フィールドデータ用
     public GameObject ObjField;
@@ -32,11 +37,43 @@ public class GameControlManager : MonoBehaviour
     int[,,] StageData;
     float TotalTileLength;
 
+    // 動く人クラス
+    class PlayerBase
+    {
+        int x;
+        int z;
+
+        public int GetX()
+        {
+            return x;
+        }
+        public void SetX( int data)
+        {
+            x = data;
+        }
+        public int GetZ()
+        {
+            return z;
+        }
+        public void SetZ(int data)
+        {
+            z = data;
+        }
+    };
+
+    // 泥棒
+    PlayerBase Theif;
+    PlayerBase Police1;
+    PlayerBase Police2;
+
+
     // Start is called before the first frame update
     void Start()
     {
         //Instantiate(ObjField, new Vector3(0,0,0), Quaternion.identity);
-
+        Theif = new PlayerBase();
+        Police1 = new PlayerBase();
+        Police2 = new PlayerBase();
 
         GameTimer = 0.0f;
         InputGameTimer = 0.0f;
@@ -66,26 +103,32 @@ public class GameControlManager : MonoBehaviour
                     posTheif = new Vector3(j * TileLength - TotalTileLength / 2.0f,
                              0.0f,
                              i * (-1.0f) * TileLength + TotalTileLength / 2.0f);
+                    Theif.SetX(i);
+                    Theif.SetZ(j);
                 }
                 else if (data == 2)
                 {
                     posPolice1 = new Vector3(j * TileLength - TotalTileLength / 2.0f,
                             0.0f,
                             i * (-1.0f) * TileLength + TotalTileLength / 2.0f);
+                    Police1.SetX(i);
+                    Police1.SetZ(j);
                 }
                 else if (data == 3)
                 {
                     posPolice2 = new Vector3(j * TileLength - TotalTileLength / 2.0f,
                             0.0f,
                             i * (-1.0f) * TileLength + TotalTileLength / 2.0f);
+                    Police2.SetX(i);
+                    Police2.SetZ(j);
                 }
             }
         }
         Debug.Log(posTheif);
 
-        Instantiate(ObjTheif, posTheif, Quaternion.identity);
-        Instantiate(ObjPolice1, posPolice1, Quaternion.identity);
-        Instantiate(ObjPolice2, posPolice2, Quaternion.identity);
+        GameObjTheif = Instantiate(ObjTheif, posTheif, Quaternion.identity);
+        GameObjPolice1 = Instantiate(ObjPolice1, posPolice1, Quaternion.identity);
+        GameObjPolice2 = Instantiate(ObjPolice2, posPolice2, Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -101,5 +144,64 @@ public class GameControlManager : MonoBehaviour
             InputGameTimer -= InputSpan;
             GameInputCounter++;
         }
+
+        // input
+
+        // 泥棒表示
+        DrawTheif();
+
+        // 警察表示
+        DrawPolice1();
+        DrawPolice2();
     }
+
+
+    void DrawTheif()
+    {
+        Vector3 posTheif = new Vector3(3, 0, 0);
+        int x;
+        int z;
+
+        x = Theif.GetX();
+        z = Theif.GetZ();
+
+        posTheif = new Vector3(z * TileLength - TotalTileLength / 2.0f,
+                 0.0f,
+                 x * (-1.0f) * TileLength + TotalTileLength / 2.0f);
+
+        GameObjTheif.transform.position = posTheif;
+    }
+
+    void DrawPolice1()
+    {
+        Vector3 posPolice = new Vector3(3, 0, 0);
+        int x;
+        int z;
+
+        x = Police1.GetX();
+        z = Police1.GetZ();
+
+        posPolice = new Vector3(z * TileLength - TotalTileLength / 2.0f,
+                 0.0f,
+                 x * (-1.0f) * TileLength + TotalTileLength / 2.0f);
+
+        GameObjPolice1.transform.position = posPolice;
+    }
+
+    void DrawPolice2()
+    {
+        Vector3 posPolice = new Vector3(3, 0, 0);
+        int x;
+        int z;
+
+        x = Police1.GetX();
+        z = Police1.GetZ();
+
+        posPolice = new Vector3(z * TileLength - TotalTileLength / 2.0f,
+                 0.0f,
+                 x * (-1.0f) * TileLength + TotalTileLength / 2.0f);
+
+        GameObjPolice1.transform.position = posPolice;
+    }
+
 }
