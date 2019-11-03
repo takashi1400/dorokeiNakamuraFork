@@ -117,6 +117,14 @@ public class GameControlManager : MonoBehaviour
     // 宝物
     Tresure[] Tresures;
 
+    // 宝物 prefab
+    public GameObject ObjTresureA;
+    public GameObject ObjTresureB;
+    public GameObject ObjTresureC;
+
+    // 宝物実体
+    GameObject[] TresureObjects;
+
 
     // Start is called before the first frame update
     void Start()
@@ -129,6 +137,7 @@ public class GameControlManager : MonoBehaviour
         // 宝物
         TresureTotalNum = 0;
         Tresures = new Tresure[TresureNumMax];
+        TresureObjects = new GameObject[TresureNumMax];
         for(int i=0; i<TresureNumMax; ++i)
         {
             Tresures[i] = new Tresure();
