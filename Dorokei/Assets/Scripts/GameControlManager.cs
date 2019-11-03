@@ -272,8 +272,11 @@ public class GameControlManager : MonoBehaviour
         }
 
         GameObjTheif = Instantiate(ObjTheif, posTheif, Quaternion.identity);
+        GameObjTheif.transform.Rotate(new Vector3(0, 90, 0));
         GameObjPolice1 = Instantiate(ObjPolice1, posPolice1, Quaternion.identity);
+        GameObjPolice1.transform.Rotate(new Vector3(0, 90, 0));
         GameObjPolice2 = Instantiate(ObjPolice2, posPolice2, Quaternion.identity);
+        GameObjPolice2.transform.Rotate(new Vector3(0, 90, 0));
     }
 
     bool thief_can_move = true;
