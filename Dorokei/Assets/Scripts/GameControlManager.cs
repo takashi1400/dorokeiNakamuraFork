@@ -757,7 +757,7 @@ public class GameControlManager : MonoBehaviour
 
         if(val == true)
         {
-            SceneManager.LoadScene("PoleceWin");
+            SceneManager.LoadScene("PoliceWin");
         }
     }
 }
