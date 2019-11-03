@@ -17,6 +17,10 @@ public class GameControlManager : MonoBehaviour
     [SerializeField]
     float InputSpan = 2.0f;
 
+    // 泥棒、警察
+    public GameObject ObjTheif;
+    public GameObject ObjPolice1;
+    public GameObject ObjPolice2;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +28,10 @@ public class GameControlManager : MonoBehaviour
         GameTimer = 0.0f;
         InputGameTimer = 0.0f;
         GameInputCounter = 0;
+
+        Instantiate(ObjTheif, new Vector3(3, 0, 0), Quaternion.identity);
+        Instantiate(ObjPolice1, new Vector3(2, 0, 0), Quaternion.identity);
+        Instantiate(ObjPolice2, new Vector3(1, 0, 0), Quaternion.identity);
     }
 
     // Update is called once per frame
