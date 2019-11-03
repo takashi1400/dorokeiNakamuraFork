@@ -444,6 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341ffca2eba114564b53774fd514de35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsPinch: 0
 --- !u!1 &737726019 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6694812772622995063, guid: 92bbc038a47f61a47ad8867a1d9a2992,
@@ -554,7 +555,9 @@ PrefabInstance:
       propertyPath: ObjField
       value: 
       objectReference: {fileID: 8176507047079111068}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 737726020, guid: 92bbc038a47f61a47ad8867a1d9a2992, type: 3}
+    - {fileID: 6467937656480375833, guid: 92bbc038a47f61a47ad8867a1d9a2992, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 92bbc038a47f61a47ad8867a1d9a2992, type: 3}
 --- !u!114 &2034063694 stripped
 MonoBehaviour:
