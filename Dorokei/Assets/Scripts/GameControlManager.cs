@@ -43,6 +43,7 @@ public class GameControlManager : MonoBehaviour
     {
         int x;
         int z;
+        bool visible;
 
         public int GetX()
         {
@@ -59,6 +60,14 @@ public class GameControlManager : MonoBehaviour
         public void SetZ(int data)
         {
             z = data;
+        }
+        public bool IsVisible()
+        {
+            return visible;
+        }
+        public void SetVisible(bool val)
+        {
+            visible = val;
         }
     };
 
@@ -115,6 +124,7 @@ public class GameControlManager : MonoBehaviour
     int[] TresureNeedsData;
     int TresureNeed;
     int TresureTotalNum;
+    int TresureGotNum;
 
     // 宝物
     Tresure[] Tresures;
@@ -145,6 +155,7 @@ public class GameControlManager : MonoBehaviour
         for (int i = 0; i < TresureNumMax; ++i)
         TresureNeedsData = new int[3] { 1, 3, 3 };
         TresureNeed = TresureNeedsData[StageNo];
+        TresureGotNum = 0;
 
         for(int i=0; i<TresureNumMax; ++i)
         {
@@ -185,6 +196,7 @@ public class GameControlManager : MonoBehaviour
                              i * (-1.0f) * TileLength + TotalTileLength / 2.0f);
                     Theif.SetX(i);
                     Theif.SetZ(j);
+                    Theif.SetVisible(true);
                 }
                 else if (data == 2)
                 {
@@ -241,6 +253,10 @@ public class GameControlManager : MonoBehaviour
         GameObjPolice2 = Instantiate(ObjPolice2, posPolice2, Quaternion.identity);
     }
 
+    bool thief_can_move = true;
+    bool police1_can_move = true;
+    bool police2_can_move = true;
+
     // Update is called once per frame
     void Update()
     {
@@ -254,14 +270,38 @@ public class GameControlManager : MonoBehaviour
             InputGameTimer -= InputSpan;
             GameInputCounter++;
 
-            ReflectPosition();
-            Debug.Log("sss");
+            //isMoveTurn = false;
         }
 
-        // move
-        MoveTheif();
-        MovePolice1();
-        MovePolice2();
+        if (1.5f < InputGameTimer || InputGameTimer < 2f)
+        {
+            // move
+            if (thief_can_move)
+            {
+                var tmp = MoveTheif();
+                if (tmp) thief_can_move = false;
+            }
+            if (police1_can_move)
+            {
+                var tmp = MovePolice1();
+                if (tmp) police1_can_move = false;
+            }
+            if (police2_can_move)
+            {
+                var tmp = MovePolice2();
+                if (tmp) police2_can_move = false;
+            }
+        }
+
+        if (0.8f < InputGameTimer && InputGameTimer < 1.2f)
+        {
+            thief_can_move = true;
+            police1_can_move = true;
+            police2_can_move = true;
+        }
+
+        // 宝物実行
+        ExecTresure();
 
         // 泥棒表示
         DrawTheif();
@@ -303,11 +343,16 @@ public class GameControlManager : MonoBehaviour
     }
 
     // 泥棒移動
-    void MoveTheif()
+    bool  MoveTheif()
     {
+        // 過去ポジション
+        int oldx = Theif.GetX();
+        int oldz = Theif.GetZ();
+
         // 泥棒
         int x = Theif.GetX();
         int z = Theif.GetZ();
+        bool moved = false;
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             x -= 1;
@@ -315,8 +360,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovableTheif(x, z)
                 )
             {
-                //Theif.SetX(x);
-                pos_buffer[(int)Charater.Thief, 0] = x;
+                Theif.SetX(x);
+                moved = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -326,8 +371,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovableTheif(x, z)
                 )
             {
-                //Theif.SetX(x);
-                pos_buffer[(int)Charater.Thief, 0] = x;
+                Theif.SetX(x);
+                moved = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -337,8 +382,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovableTheif(x, z)
                 )
             {
-                //Theif.SetZ(z);
-                pos_buffer[(int)Charater.Thief, 1] = z;
+                Theif.SetZ(z);
+                moved = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -348,20 +393,23 @@ public class GameControlManager : MonoBehaviour
                 && isMovableTheif(x, z)
                 )
             {
-                //Theif.SetZ(z);
-                pos_buffer[(int)Charater.Thief, 1] = z;
+                Theif.SetZ(z);
+                moved = true;
             }
 
         }
 
+        return moved;
     }
 
     // 警察1移動
-    void MovePolice1()
+    bool MovePolice1()
     {
         // 泥棒
         int x = Police1.GetX();
         int z = Police1.GetZ();
+        bool moved = false;
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             x -= 1;
@@ -369,8 +417,9 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                //Police1.SetX(x);
-                pos_buffer[(int)Charater.Police1, 0] = x;
+                Police1.SetX(x);
+                //[(int)Charater.Police1, 0] = x;
+                moved = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.S))
@@ -380,8 +429,10 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                //Police1.SetX(x);
-                pos_buffer[(int)Charater.Police1, 0] = x;
+                Police1.SetX(x);
+                //pos_buffer[(int)Charater.Police1, 0] = x;
+
+                moved = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.A))
@@ -391,8 +442,9 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                //Police1.SetZ(z);
-                pos_buffer[(int)Charater.Police1, 1] = z;
+                Police1.SetZ(z);
+                //pos_buffer[(int)Charater.Police1, 1] = z;
+                moved = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.D))
@@ -402,19 +454,22 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                //Police1.SetZ(z);
-                pos_buffer[(int)Charater.Police1, 1] = z;
+                Police1.SetZ(z);
+                //pos_buffer[(int)Charater.Police1, 1] = z;
+                moved = true;
             }
 
         }
+        return moved;
     }
 
     // 警察1移動
-    void MovePolice2()
+    bool MovePolice2()
     {
         // 泥棒
         int x = Police2.GetX();
         int z = Police2.GetZ();
+        bool moved = false;
         if (Input.GetKeyDown(KeyCode.U))
         {
             x -= 1;
@@ -422,8 +477,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                //Police2.SetX(x);
-                pos_buffer[(int)Charater.Police2, 0] = x;
+                Police2.SetX(x);
+                moved = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.J))
@@ -433,8 +488,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                //Police2.SetX(x);
-                pos_buffer[(int)Charater.Police2, 0] = x;
+                Police2.SetX(x);
+                moved = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.H))
@@ -444,8 +499,8 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                //Police2.SetZ(z);
-                pos_buffer[(int)Charater.Police2, 1] = z;
+                Police2.SetZ(z);
+                moved = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.K))
@@ -455,11 +510,12 @@ public class GameControlManager : MonoBehaviour
                 && isMovablePolice(x, z)
                 )
             {
-                //Police2.SetZ(z);
-                pos_buffer[(int)Charater.Police2, 1] = z;
+                Police2.SetZ(z);
+                moved = true;
             }
 
         }
+        return moved;
     }
 
     // 位置チェック宝物
@@ -552,7 +608,14 @@ public class GameControlManager : MonoBehaviour
                  0.0f,
                  x * (-1.0f) * TileLength + TotalTileLength / 2.0f);
 
-        GameObjTheif.transform.position = posTheif;
+        if(Theif.IsVisible())
+        {
+            GameObjTheif.transform.position = posTheif;
+        }
+        else
+        {
+            GameObjTheif.transform.position = new Vector3(-100, 0, -100);
+        }
     }
 
     // 警察表示1
@@ -589,4 +652,34 @@ public class GameControlManager : MonoBehaviour
         GameObjPolice2.transform.position = posPolice;
     }
 
+    // 宝物実行
+    void ExecTresure()
+    {
+        int x;
+        int z;
+
+        // 泥棒位置
+        x = Theif.GetX();
+        z = Theif.GetZ();
+
+        // 宝物チェック
+        for (int i = 0; i < TresureTotalNum; ++i)
+        {
+            if (Tresures[i].isAlive()
+                && x == Tresures[i].GetX()
+                && z == Tresures[i].GetZ()
+                )
+            {
+                // 宝物ゲット!
+                Tresures[i].SetAlive(false);
+                Tresures[i].SetX(-100);
+                Tresures[i].SetZ(-100);
+
+                TresureObjects[i].transform.position = new Vector3(-100, 0, -100);
+                ++TresureGotNum;
+                break;
+            }
+        }
+
+    }
 }
