@@ -33,7 +33,7 @@ public class SceneMove : MonoBehaviour
                 SceneManager.LoadScene("Stage1");
             }
         }
-        else if (SceneManager.GetActiveScene().name == "ThiefWin")
+        else if (SceneManager.GetActiveScene().name == "ThiefWin" || SceneManager.GetActiveScene().name == "PoliceWin")
         {
             if (Input.anyKey)
             {
@@ -42,7 +42,7 @@ public class SceneMove : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "Credit")
         {
-            if (Input.GetKey(KeyCode.Return))
+            if (Input.anyKey)
             {
                 SceneManager.LoadScene("Start");
             }
