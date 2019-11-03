@@ -34,6 +34,7 @@ public class GameControlManager : MonoBehaviour
     int TileMax;
     float TileLength;
     int[] StageTileMax;
+    int StageTileNumMax;
     int[,,] StageData;
     float TotalTileLength;
 
@@ -83,9 +84,10 @@ public class GameControlManager : MonoBehaviour
         TileMax = ObjField.GetComponent<field>().TileMax;
         TileLength = ObjField.GetComponent<field>().TileLength;
         StageTileMax = ObjField.GetComponent<field>().StageTileMax;
+        StageTileNumMax = StageTileMax[StageNo];
         StageData = ObjField.GetComponent<field>().StageData;
 
-        TotalTileLength = TileLength * StageTileMax[StageNo];
+        TotalTileLength = TileLength * StageTileNumMax;
 
 
         Vector3 posTheif = new Vector3(3, 0, 0);
@@ -145,7 +147,10 @@ public class GameControlManager : MonoBehaviour
             GameInputCounter++;
         }
 
-        // input
+        // move
+        MoveTheif();
+        MovePolice1();
+        MovePolice2();
 
         // 泥棒表示
         DrawTheif();
@@ -155,7 +160,139 @@ public class GameControlManager : MonoBehaviour
         DrawPolice2();
     }
 
+    // 泥棒移動
+    void MoveTheif()
+    {
+        // 泥棒
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            int x = Theif.GetX();
+            x -= 1;
+            if (x >= 0)
+            {
+                Theif.SetX(x);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            int x = Theif.GetX();
+            x += 1;
+            if (x < StageTileNumMax)
+            {
+                Theif.SetX(x);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            int z = Theif.GetZ();
+            z -= 1;
+            if (z >= 0)
+            {
+                Theif.SetZ(z);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            int z = Theif.GetZ();
+            z += 1;
+            if (z < StageTileNumMax)
+            {
+                Theif.SetZ(z);
+            }
 
+        }
+
+    }
+
+    // 警察1移動
+    void MovePolice1()
+    {
+        // 泥棒
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            int x = Police1.GetX();
+            x -= 1;
+            if (x >= 0)
+            {
+                Police1.SetX(x);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            int x = Police1.GetX();
+            x += 1;
+            if (x < StageTileNumMax)
+            {
+                Police1.SetX(x);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            int z = Police1.GetZ();
+            z -= 1;
+            if (z >= 0)
+            {
+                Police1.SetZ(z);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            int z = Police1.GetZ();
+            z += 1;
+            if (z < StageTileNumMax)
+            {
+                Police1.SetZ(z);
+            }
+
+        }
+
+    }
+
+    // 警察1移動
+    void MovePolice2()
+    {
+        // 泥棒
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            int x = Police2.GetX();
+            x -= 1;
+            if (x >= 0)
+            {
+                Police2.SetX(x);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            int x = Police2.GetX();
+            x += 1;
+            if (x < StageTileNumMax)
+            {
+                Police2.SetX(x);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            int z = Police2.GetZ();
+            z -= 1;
+            if (z >= 0)
+            {
+                Police2.SetZ(z);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            int z = Police2.GetZ();
+            z += 1;
+            if (z < StageTileNumMax)
+            {
+                Police2.SetZ(z);
+            }
+
+        }
+
+    }
+
+    // 泥棒表示
     void DrawTheif()
     {
         Vector3 posTheif = new Vector3(3, 0, 0);
@@ -172,6 +309,7 @@ public class GameControlManager : MonoBehaviour
         GameObjTheif.transform.position = posTheif;
     }
 
+    // 警察表示1
     void DrawPolice1()
     {
         Vector3 posPolice = new Vector3(3, 0, 0);
@@ -188,20 +326,21 @@ public class GameControlManager : MonoBehaviour
         GameObjPolice1.transform.position = posPolice;
     }
 
+    // 警察表示2
     void DrawPolice2()
     {
         Vector3 posPolice = new Vector3(3, 0, 0);
         int x;
         int z;
 
-        x = Police1.GetX();
-        z = Police1.GetZ();
+        x = Police2.GetX();
+        z = Police2.GetZ();
 
         posPolice = new Vector3(z * TileLength - TotalTileLength / 2.0f,
                  0.0f,
                  x * (-1.0f) * TileLength + TotalTileLength / 2.0f);
 
-        GameObjPolice1.transform.position = posPolice;
+        GameObjPolice2.transform.position = posPolice;
     }
 
 }
