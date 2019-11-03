@@ -176,6 +176,8 @@ public class field : MonoBehaviour
                         heightAdjust,
                         i * (-1.0f) * TileLength + TotalTileLength / 2.0f + zAdjust),
                         Quaternion.identity);
+
+                    isTresure = false;
                     if( isTresure )
                     {
                         Instantiate(objTresure, new Vector3(j * TileLength - TotalTileLength / 2.0f + xAdjust,
@@ -209,7 +211,6 @@ public class field : MonoBehaviour
                     if (i <= StageTileMax[StageNo])
                     {
                         view = true;
-
                     }
                 }
                 if(view)
