@@ -18,8 +18,10 @@ public class Countdown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(_textCountdown_number != null)
         _textCountdown_number.text = "";
-        _textCountdown_start.text = "";
+        if (_textCountdown_start != null)
+            _textCountdown_start.text = "";
         StartCoroutine(CountdownCoroutine());
 
     }

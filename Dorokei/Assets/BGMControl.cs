@@ -8,7 +8,7 @@ public class BGMControl : MonoBehaviour
     GameObject contollerobject;
     GameControlManager gamecontrolmanager;
     CriAtomSource criSource;
-    int period = 0;
+    int period = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -17,12 +17,13 @@ public class BGMControl : MonoBehaviour
 
         criSource = this.GetComponent<CriAtomSource>();
         gamecontrolmanager = contollerobject.GetComponent<GameControlManager>();
-        SoundPlay();
+        //SoundPlay();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //切り替え開始で音鳴動
         if(period != gamecontrolmanager.GameInputCounter)
         {
             SoundPlay();
@@ -33,7 +34,7 @@ public class BGMControl : MonoBehaviour
 
     private void SoundPlay()
     {
-        criSource.cueName = (period %2 == 0) ? "chase1" : "chase2";
+        criSource.cueName = (period % 2 == 0) ? "chase1" : "chase2";
         this.criSource.Play();
     }
 }
